@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elizabeth J. Ramirez — Director, Finance BI & Sales Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════════
+   COLOR TOKENS — edit only this block to retheme the site
+   ════════════════════════════════════════════════════════
+
+   --gold           main accent: buttons, links, highlights
+   --gold-light      hover/italic tint
+   --gold-dim        darker shade for button hover
+
+   --bg              page background
+   --bg-card         slightly lighter surface
+   --bg-subtle       nav / ticker / alt section background
+   --border          all dividers and outlines
+
+   --text-primary    headings and key labels
+   --text-secondary  body copy and descriptions
+   --text-muted      timestamps, captions
+
+   --gloss-bg        glass card fill (semi-transparent)
+   --gloss-border    glass card border
+   --gloss-shine     1px top-edge sheen (the glossy effect)
+   --gloss-shadow    glass card shadow
+
+   --skill-1 … --skill-6   icon accent per capability card
+   ════════════════════════════════════════════════════════ */
+:root {
+  --gold:        #C49A2A;
+  --gold-light:  #E0B94A;
+  --gold-dim:    #9A780F;
+
+  --bg:          #0E0D0B;
+  --bg-card:     #181612;
+  --bg-subtle:   #1D1B16;
+  --border:      #2A2720;
+
+  --text-primary:   #F2EEE6;
+  --text-secondary: #A8A198;
+  --text-muted:     #635D56;
+
+  --nav-bg: rgba(14,13,11,0.90);
+
+  --gloss-bg:     rgba(255,255,255,0.04);
+  --gloss-border: rgba(255,255,255,0.09);
+  --gloss-shine:  rgba(255,255,255,0.13);
+  --gloss-shadow: 0 2px 1px rgba(255,255,255,0.04) inset, 0 8px 32px rgba(0,0,0,0.55);
+
+  --skill-1: #C49A2A;
+  --skill-2: #4A9ECC;
+  --skill-3: #4AAF7A;
+  --skill-4: #9B72CF;
+  --skill-5: #CF7272;
+  --skill-6: #72A8CF;
+
+  --radius: 10px;
+}
+
+/* ── Reset ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Typography ─────────────────────────────────────── */
+.display {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500; line-height: 1.1; letter-spacing: -0.02em;
+}
+.display em { font-style: italic; color: var(--gold-light); }
+.mono {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── Glass card ─────────────────────────────────────── */
+.glass {
+  background: var(--gloss-bg);
+  border: 1px solid var(--gloss-border);
+  border-radius: var(--radius);
+  box-shadow: var(--gloss-shadow);
+  position: relative; overflow: hidden;
+}
+.glass::after {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: var(--gloss-shine); pointer-events: none;
+}
+
+/* ── Nav ────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 60px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(1rem, 5vw, 4rem);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600; font-size: 1.05rem;
+  color: var(--text-primary); text-decoration: none; flex-shrink: 0;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links {
+  list-style: none; display: flex; gap: 2rem;
+  align-items: center;
+}
+.nav-links a {
+  text-decoration: none; font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-secondary); transition: color 0.2s; white-space: nowrap;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-right { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+.nav-cta {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 0.4rem 0.95rem;
+  background: var(--gold); color: #0E0D0B;
+  border-radius: 4px; text-decoration: none;
+  transition: background 0.2s; white-space: nowrap;
+}
+.nav-cta:hover { background: var(--gold-light); }
+.hamburger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px; width: 32px; height: 32px;
+}
+.hamburger span { display: block; width: 20px; height: 1.5px; background: var(--text-primary); transition: all 0.25s; }
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile nav drawer */
+.mobile-nav {
+  display: none;
+  position: fixed; top: 60px; left: 0; right: 0; z-index: 199;
+  background: rgba(14,13,11,0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem clamp(1rem,5vw,2rem) 2rem;
+  flex-direction: column; gap: 0;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  display: block; text-decoration: none; font-size: 0.9rem; font-weight: 500;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--text-secondary); padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border); transition: color 0.2s;
+}
+.mobile-nav a:last-child { border-bottom: none; }
+.mobile-nav a:hover { color: var(--gold); }
+
+/* ── Shared section ─────────────────────────────────── */
+section {
+  padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 6vw, 6.5rem);
+  border-bottom: 1px solid var(--border);
+}
+section:last-of-type { border-bottom: none; }
+
+.sec-label { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
+.sec-label-line { width: 22px; height: 1px; background: var(--gold); flex-shrink: 0; }
+.sec-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 0; }
+
+/* ── HERO ───────────────────────────────────────────── */
+#hero {
+  min-height: 100svh;
+  padding-top: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding-left: clamp(1.25rem, 6vw, 6.5rem);
+  padding-right: clamp(1.25rem, 6vw, 6.5rem);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+  position: relative; overflow: hidden;
+}
+.hero-slash {
+  position: absolute; top: 0; right: -8vw;
+  width: 52vw; height: 100%;
+  background: var(--bg-subtle);
+  transform: skewX(-8deg); z-index: 0;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-eyebrow { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.25rem; }
+.hero-eyebrow-line { width: 26px; height: 1px; background: var(--gold); }
+.hero-name { font-size: clamp(2.6rem, 6vw, 4.6rem); margin-bottom: 0.2rem; }
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-style: italic; color: var(--text-secondary); margin-bottom: 1.5rem;
+}
+.hero-body {
+  font-size: clamp(0.88rem, 1.5vw, 0.96rem);
+  color: var(--text-secondary); line-height: 1.8;
+  max-width: 440px; margin-bottom: 2rem;
+}
+.hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.btn-primary {
+  padding: 0.68rem 1.6rem; background: var(--gold); color: #0E0D0B;
+  font-weight: 600; font-size: 0.75rem; letter-spacing: 0.06em;
+  text-transform: uppercase; border-radius: 4px; text-decoration: none;
+  border: none; cursor: pointer; display: inline-block;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-outline {
+  padding: 0.68rem 1.6rem; background: transparent;
+  color: var(--text-primary); font-weight: 600;
+  font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase;
+  border: 1px solid var(--border); border-radius: 4px; text-decoration: none;
+  display: inline-block; transition: border-color 0.2s, color 0.2s, transform 0.15s;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+.btn-download {
+  padding: 0.68rem 1.4rem;
+  background: transparent;
+  color: var(--gold);
+  font-weight: 600; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase;
+  border: 1px solid var(--gold);
+  border-radius: 4px; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+.btn-download:hover { background: var(--gold); color: #0E0D0B; transform: translateY(-1px); }
+
+/* Hero stats */
+.hero-stats { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1.1rem; }
+.stat-card {
+  padding: 1.25rem 1.5rem;
+  display: flex; align-items: center; gap: 1.25rem;
+  transition: transform 0.2s;
+}
+.stat-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--gold);
+}
+.stat-card:hover { transform: translateX(4px); }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3vw, 2.6rem); font-weight: 600;
+  color: var(--gold); line-height: 1; white-space: nowrap; flex-shrink: 0;
+}
+.stat-num sup { font-size: 1rem; }
+.stat-label { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.12rem; }
+.stat-desc { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4; }
+
+/* ── Ticker ─────────────────────────────────────────── */
+.ticker-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0; background: var(--bg-subtle);
+}
+.ticker-track {
+  display: flex; gap: 2.5rem;
+  animation: tick 30s linear infinite; width: max-content;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item {
+  white-space: nowrap; font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-secondary); display: flex; align-items: center; gap: 0.75rem;
+}
+.ticker-item::after { content: '·'; color: var(--gold); font-size: 1rem; }
+@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── ABOUT ──────────────────────────────────────────── */
+#about {
+  display: grid; grid-template-columns: 200px 1fr;
+  gap: clamp(2rem, 5vw, 5rem); align-items: start;
+}
+.about-sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+.profile-photo-wrap {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--gloss-border);
+  box-shadow: 0 0 0 4px rgba(196,154,42,0.18), var(--gloss-shadow);
+  position: relative; flex-shrink: 0;
+}
+.profile-photo-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
+  pointer-events: none;
+}
+.profile-photo {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+}
+@media (max-width: 520px) {
+  .profile-photo-wrap { width: 120px; height: 120px; }
+}
+.contact-row {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.45rem;
+}
+.contact-row svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--gold); }
+.about-text {
+  font-size: clamp(0.88rem, 1.4vw, 0.96rem);
+  color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.1rem;
+}
+.about-quote {
+  border-left: 2px solid var(--gold); padding: 0.9rem 1.25rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-style: italic; color: var(--text-primary);
+  margin: 1.5rem 0; line-height: 1.55;
+  background: rgba(255,255,255,0.02); border-radius: 0 6px 6px 0;
+}
+
+/* ── EXPERIENCE ─────────────────────────────────────── */
+.timeline { display: flex; flex-direction: column; }
+.tl-item {
+  display: grid; grid-template-columns: 200px 1fr;
+  gap: clamp(1rem, 3vw, 2rem); padding: 2rem 0;
+  border-top: 1px solid var(--border);
+}
+.tl-item:last-child { border-bottom: 1px solid var(--border); }
+.tl-date {
+  font-family: 'DM Mono', monospace; font-size: 0.67rem;
+  letter-spacing: 0.07em; color: var(--gold);
+  margin-bottom: 0.35rem; display: block;
+}
+.tl-company { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.12rem; }
+.tl-sub { font-size: 0.73rem; color: var(--text-muted); }
+.tl-role {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 500; margin-bottom: 1rem;
+}
+.tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.tl-bullets li {
+  font-size: clamp(0.82rem, 1.3vw, 0.87rem);
+  color: var(--text-secondary); line-height: 1.65;
+  padding-left: 1.05rem; position: relative;
+}
+.tl-bullets li::before { content:'–'; position:absolute; left:0; color:var(--gold); }
+
+/* ── SKILLS ─────────────────────────────────────────── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+.skill-card {
+  padding: 1.5rem 1.6rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.skill-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.65); }
+.skill-card-head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+.skill-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.skill-icon svg { width: 19px; height: 19px; }
+.skill-card-title { font-weight: 600; font-size: 0.87rem; color: var(--text-primary); }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.skill-tag {
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.03em;
+  padding: 0.22rem 0.55rem; color: var(--text-secondary);
+  border: 1px solid var(--border); border-radius: 3px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.skill-tag:hover { border-color: var(--gold); color: var(--gold-light); }
+
+/* ── CREDENTIALS ────────────────────────────────────── */
+.edu-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 1.5rem 0; border-bottom: 1px solid var(--border); gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.edu-row:first-child { border-top: 1px solid var(--border); }
+.edu-degree-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 2vw, 1.45rem); font-weight: 500; margin-bottom: 0.28rem;
+}
+.edu-school-text { font-weight: 600; font-size: 0.86rem; margin-bottom: 0.12rem; }
+.edu-detail-text { font-size: 0.78rem; color: var(--text-muted); }
+.edu-badge {
+  flex-shrink: 0; padding: 0.32rem 0.95rem;
+  border: 1px solid var(--gold); color: var(--gold);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem; font-style: italic; border-radius: 3px;
+}
+.cert-row {
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 1rem 0; border-bottom: 1px solid var(--border);
+  transition: padding-left 0.2s;
+}
+.cert-row:first-child { border-top: 1px solid var(--border); }
+.cert-row:hover { padding-left: 0.35rem; }
+.cert-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.cert-text { font-size: 0.85rem; color: var(--text-secondary); }
+
+/* ── CONTACT ────────────────────────────────────────── */
+#contact { background: var(--bg); }
+.contact-layout {
+  display: grid; grid-template-columns: 2fr 1fr;
+  gap: clamp(2rem, 4vw, 4rem); align-items: start;
+}
+.contact-links { display: flex; flex-direction: column; gap: 0.65rem; margin-top: 1.5rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.85rem 1.1rem;
+  text-decoration: none; color: var(--text-secondary);
+  font-size: 0.84rem; font-weight: 500;
+  border-radius: 6px; transition: border-color 0.2s, color 0.2s, transform 0.15s;
+}
+.contact-link:hover { color: var(--gold-light); transform: translateX(4px); }
+.contact-link-icon { font-size: 0.95rem; color: var(--gold); flex-shrink: 0; }
+.avail-card { padding: 1.6rem; }
+.avail-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #22c55e;
+  display: inline-block; margin-right: 0.4rem;
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.avail-label {
+  font-size: 0.72rem; font-weight: 600; color: #22c55e;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  display: flex; align-items: center; margin-bottom: 0.85rem;
+}
+.avail-text { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.65; }
+.preferred-roles { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+
+/* ── Footer ─────────────────────────────────────────── */
+footer {
+  padding: 1.5rem clamp(1.25rem, 6vw, 6.5rem);
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.73rem; color: var(--text-muted); flex-wrap: wrap; gap: 0.5rem;
+}
+
+/* ── Scroll reveal ──────────────────────────────────── */
+.reveal { opacity:0; transform:translateY(16px); transition:opacity 0.5s ease,transform 0.5s ease; }
+.reveal.visible { opacity:1; transform:none; }
+.stagger>* { opacity:0; transform:translateY(12px); transition:opacity 0.4s ease,transform 0.4s ease; }
+.stagger.visible>*:nth-child(1){opacity:1;transform:none;transition-delay:0.04s}
+.stagger.visible>*:nth-child(2){opacity:1;transform:none;transition-delay:0.11s}
+.stagger.visible>*:nth-child(3){opacity:1;transform:none;transition-delay:0.18s}
+.stagger.visible>*:nth-child(4){opacity:1;transform:none;transition-delay:0.25s}
+.stagger.visible>*:nth-child(5){opacity:1;transform:none;transition-delay:0.32s}
+.stagger.visible>*:nth-child(6){opacity:1;transform:none;transition-delay:0.39s}
+.stagger.visible>*:nth-child(n+7){opacity:1;transform:none;transition-delay:0.44s}
+
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE — mobile-first breakpoints
+   ════════════════════════════════════════════════════════ */
+
+/* Tablet: hide desktop nav links, show hamburger */
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* Tablet: hero stacks */
+@media (max-width: 800px) {
+  #hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: calc(60px + 2rem);
+    padding-bottom: 2.5rem;
+    gap: 2rem;
+  }
+  .hero-slash { display: none; }
+  .hero-stats { flex-direction: row; flex-wrap: wrap; gap: 0.85rem; }
+  .stat-card { flex: 1 1 160px; }
+  #about { grid-template-columns: 1fr; gap: 1.75rem; }
+  .about-sidebar { flex-direction: row; flex-wrap: wrap; gap: 1.25rem; align-items: flex-start; }
+  .tl-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; }
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+  .hero-btns { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-outline { text-align: center; }
+  .hero-stats { flex-direction: column; }
+  .stat-card { flex: none; width: 100%; }
+  .edu-row { flex-direction: column; gap: 0.65rem; }
+  .edu-badge { align-self: flex-start; }
+  .about-sidebar { flex-direction: column; }
+  footer { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Elizabeth<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="mailto:ejr3182000@gmail.com" class="nav-cta">Hire Me</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about"       onclick="closeMenu()">About</a>
+  <a href="#experience"  onclick="closeMenu()">Experience</a>
+  <a href="#skills"      onclick="closeMenu()">Skills</a>
+  <a href="#credentials" onclick="closeMenu()">Credentials</a>
+  <a href="#contact"     onclick="closeMenu()">Contact</a>
+</div>
+
+
+<!-- ═══ HERO ═══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-slash"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="mono">Director · Finance BI · Sales Strategy</span>
+    </div>
+    <h1 class="display hero-name">Elizabeth J.<br><em>Ramirez</em></h1>
+    <p class="hero-sub">Turning strategy into systems and systems into results.</p>
+    <p class="hero-body">Over a decade directing Finance Business Intelligence, CRM and ERP platforms, and cross-functional analytics at Google Cloud (Mandiant). Expert at converting complex data into the executive decisions that move organisations forward.</p>
+    <div class="hero-btns">
+      <a href="#experience" class="btn-primary">View Experience</a>
+      <a href="#contact"    class="btn-outline">Get in Touch</a>
+      <a href="resume.pdf" target="_blank" rel="noopener" class="btn-download" aria-label="View Resume">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="6.5" y1="1" x2="6.5" y2="9"/>
+          <polyline points="3,6.5 6.5,10 10,6.5"/>
+          <line x1="1" y1="12" x2="12" y2="12"/>
+        </svg>
+        Resume
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats stagger">
+    <div class="stat-card glass">
+      <div class="stat-num">12<sup>+</sup></div>
+      <div>
+        <div class="stat-label">Years at Google Cloud / Mandiant</div>
+        <div class="stat-desc">Director-level Finance BI &amp; Sales Strategy</div>
+      </div>
+    </div>
+    <div class="stat-card glass">
+      <div class="stat-num">6<sup>+</sup></div>
+      <div>
+        <div class="stat-label">Stakeholder Groups Served</div>
+        <div class="stat-desc">Finance, Sales, Product, Channel, Legal, Executive</div>
+      </div>
+    </div>
+    <div class="stat-card glass">
+      <div class="stat-num">20<sup>+</sup></div>
+      <div>
+        <div class="stat-label">Years Total Experience</div>
+        <div class="stat-desc">BI, CRM, ERP, Operations &amp; IT Leadership</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ticker -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">Finance BI</span><span class="ticker-item">Tableau</span><span class="ticker-item">Power BI</span><span class="ticker-item">OBIEE</span><span class="ticker-item">Google Cloud</span><span class="ticker-item">Salesforce SFDC</span><span class="ticker-item">Data Governance</span><span class="ticker-item">ERP Integration</span><span class="ticker-item">CRM Management</span><span class="ticker-item">Executive Analytics</span><span class="ticker-item">SEC Reporting</span><span class="ticker-item">Go-to-Market Strategy</span><span class="ticker-item">Sales Performance</span><span class="ticker-item">Lean Six Sigma</span><span class="ticker-item">Program Management</span>
+    <span class="ticker-item">Finance BI</span><span class="ticker-item">Tableau</span><span class="ticker-item">Power BI</span><span class="ticker-item">OBIEE</span><span class="ticker-item">Google Cloud</span><span class="ticker-item">Salesforce SFDC</span><span class="ticker-item">Data Governance</span><span class="ticker-item">ERP Integration</span><span class="ticker-item">CRM Management</span><span class="ticker-item">Executive Analytics</span><span class="ticker-item">SEC Reporting</span><span class="ticker-item">Go-to-Market Strategy</span><span class="ticker-item">Sales Performance</span><span class="ticker-item">Lean Six Sigma</span><span class="ticker-item">Program Management</span>
+  </div>
+</div>
+
+
+<!-- ═══ ABOUT ═══════════════════════════════════════════ -->
+<section id="about">
+  <div class="about-sidebar reveal">
+    <div>
+      <div class="profile-photo-wrap">
+        <img src="/Users/dilshad/Desktop/Jeannie/Photo.png" alt="Elizabeth J. Ramirez" class="profile-photo">
+      </div>
+    </div>
+    <div>
+      <div class="mono" style="margin-bottom:0.85rem">Contact</div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.48-1.48a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        972-814-7805
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        ejr3182000@gmail.com
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Frisco, TX
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="sec-label"><div class="sec-label-line"></div><span class="mono">About</span></div>
+    <h2 class="display sec-title" style="margin-bottom:1.4rem">The leader <em>behind</em> the data.</h2>
+    <p class="about-text">I'm a Director-level Finance BI and Sales Strategy executive with over two decades of experience at the intersection of data, technology, and business leadership. My career has been defined by one consistent outcome: turning complex, fragmented information into the clear metrics that executive teams act on.</p>
+    <p class="about-text">At Mandiant (part of Google Cloud, formerly FireEye), I led a 12-year tenure directing Finance Business Intelligence through every phase of the company's evolution from growth, through a major divestiture coordinated with the DOJ, to a full integration into Google Cloud. I built and led BI/IT teams of remote and offshore resources, governed enterprise-wide data initiatives, and delivered financial analytics for SEC and Wall Street reporting.</p>
+    <div class="about-quote">"I don't just deliver reports. I build the analytical infrastructure that makes an organisation smarter, and keeps it that way through every transition."</div>
+    <p class="about-text">Outside of pure BI, I bring strategic depth to sales operations: contributing to Go-to-Market planning, compensation design, sales performance analysis, and renewal forecasting. I understand how data connects to commercial outcomes and build systems that keep that connection strong.</p>
+  </div>
+</section>
+
+
+<!-- ═══ EXPERIENCE ══════════════════════════════════════ -->
+<section id="experience">
+  <div class="sec-label reveal"><div class="sec-label-line"></div><span class="mono">Work Experience</span></div>
+  <h2 class="display sec-title reveal" style="margin-bottom:2.5rem">Where I've <em>delivered.</em></h2>
+
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div>
+        <span class="tl-date">Mar 2013 — Apr 2025</span>
+        <div class="tl-company">Mandiant / Google Cloud</div>
+        <div class="tl-sub">fka FireEye · California</div>
+      </div>
+      <div>
+        <div class="tl-role">Director, Finance Business Intelligence &amp; Sales Strategy</div>
+        <ul class="tl-bullets">
+          <li>Directed a two-phased SaaS and Services integration from legacy platforms into Google Cloud with zero business continuity disruption.</li>
+          <li>Delivered quarterly, monthly, and ad hoc financial metrics for Executives (Finance, Product, Channel, Sales, Legal) and for SEC/Wall Street reporting.</li>
+          <li>Managed the FireEye divestiture coordinated with the DOJ, internal teams, and external purchasing organisations.</li>
+          <li>Automated enterprise metrics generation, converting manual processes into scalable analytics frameworks.</li>
+          <li>Integrated data from acquired companies (sales, financial, assets, channel) into established reporting structures.</li>
+          <li>Contributed to annual Go-to-Market strategy, compensation planning, sales performance analysis, and renewal forecasting.</li>
+          <li>Built and managed a distributed BI/IT team of remote and offshore resources.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div>
+        <span class="tl-date">Oct 2012 — Mar 2013</span>
+        <div class="tl-company">McAfee, Inc.</div>
+        <div class="tl-sub">aka Trellix · Plano, TX</div>
+      </div>
+      <div>
+        <div class="tl-role">Business Performance Analysis Manager</div>
+        <ul class="tl-bullets">
+          <li>Managed on-site, remote, and offshore resources to deliver dashboard and ad hoc reporting.</li>
+          <li>Collaborated with IT, Finance, Operations, and Management on application enhancements and efficiency improvements.</li>
+          <li>Implemented an end-to-end reporting framework spanning ERP, CRM, and MS applications.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div>
+        <span class="tl-date">Apr 2001 — Oct 2012</span>
+        <div class="tl-company">CoreLogic, Inc.</div>
+        <div class="tl-sub">fka First American Corp. · Westlake</div>
+      </div>
+      <div>
+        <div class="tl-role">Application Manager</div>
+        <ul class="tl-bullets">
+          <li>Managed on-site, remote, and offshore teams for end-to-end IT solutions delivery and support.</li>
+          <li>Defined and executed programme governance: budget, resource allocation, scope, risk management.</li>
+          <li>Implemented and managed CRM and Master Data Management (MDM) platforms.</li>
+          <li>Maintained security compliance, business continuity, and enterprise vendor relationships at scale.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SKILLS ══════════════════════════════════════════ -->
+<section id="skills" style="background:var(--bg-subtle)">
+  <div class="sec-label reveal"><div class="sec-label-line"></div><span class="mono">Core Capabilities</span></div>
+  <h2 class="display sec-title reveal" style="margin-bottom:2rem">What I bring to <em>every role.</em></h2>
+
+  <div class="skills-grid stagger">
+
+    <div class="skill-card glass">
+      <div class="skill-card-head">
+        <div class="skill-icon" style="background:rgba(196,154,42,0.12)">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--skill-1)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="11" width="3" height="8" rx="0.5"/><rect x="7" y="7" width="3" height="12" rx="0.5"/><rect x="13" y="3" width="3" height="16" rx="0.5"/>
+            <polyline points="2,6 7,4 13,5.5 18,2"/><circle cx="18" cy="2" r="1.2" fill="var(--skill-1)" stroke="none"/>
+          </svg>
+        </div>
+        <div class="skill-card-title">Business Intelligence &amp; Analytics</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Tableau</span><span class="skill-tag">Power BI</span><span class="skill-tag">OBIEE</span><span class="skill-tag">Google PLX</span><span class="skill-tag">Executive Dashboards</span><span class="skill-tag">KPI Design</span><span class="skill-tag">Ad Hoc Reporting</span>
+      </div>
+    </div>
+
+    <div class="skill-card glass">
+      <div class="skill-card-head">
+        <div class="skill-icon" style="background:rgba(74,158,204,0.12)">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--skill-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="1" width="7" height="7" rx="1"/><rect x="12" y="1" width="7" height="7" rx="1"/>
+            <rect x="1" y="12" width="7" height="7" rx="1"/><rect x="12" y="12" width="7" height="7" rx="1"/>
+            <line x1="8" y1="4.5" x2="12" y2="4.5"/><line x1="8" y1="15.5" x2="12" y2="15.5"/>
+            <line x1="4.5" y1="8" x2="4.5" y2="12"/><line x1="15.5" y1="8" x2="15.5" y2="12"/>
+          </svg>
+        </div>
+        <div class="skill-card-title">CRM, ERP &amp; Platform Management</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Salesforce SFDC</span><span class="skill-tag">ERP Systems</span><span class="skill-tag">MDM</span><span class="skill-tag">CRM Implementation</span><span class="skill-tag">MS 365</span><span class="skill-tag">Azure</span>
+      </div>
+    </div>
+
+    <div class="skill-card glass">
+      <div class="skill-card-head">
+        <div class="skill-icon" style="background:rgba(74,175,122,0.12)">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--skill-3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="2,16 6,10 10,13 15,5.5 19,8"/>
+            <polyline points="15,5.5 19,5.5 19,9.5"/>
+            <circle cx="6" cy="10" r="1.2" fill="var(--skill-3)" stroke="none"/>
+            <circle cx="10" cy="13" r="1.2" fill="var(--skill-3)" stroke="none"/>
+            <circle cx="15" cy="5.5" r="1.2" fill="var(--skill-3)" stroke="none"/>
+          </svg>
+        </div>
+        <div class="skill-card-title">Finance &amp; Sales Strategy</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">SEC / Wall Street Reporting</span><span class="skill-tag">Go-to-Market Strategy</span><span class="skill-tag">Compensation Planning</span><span class="skill-tag">Revenue Forecasting</span><span class="skill-tag">Sales Performance</span>
+      </div>
+    </div>
+
+    <div class="skill-card glass">
+      <div class="skill-card-head">
+        <div class="skill-icon" style="background:rgba(155,114,207,0.12)">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--skill-4)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="10" cy="10" r="2.5"/>
+            <circle cx="3" cy="4" r="2"/><circle cx="17" cy="4" r="2"/>
+            <circle cx="3" cy="16" r="2"/><circle cx="17" cy="16" r="2"/>
+            <line x1="4.8" y1="5.5" x2="8.3" y2="8.5"/><line x1="15.2" y1="5.5" x2="11.7" y2="8.5"/>
+            <line x1="4.8" y1="14.5" x2="8.3" y2="11.5"/><line x1="15.2" y1="14.5" x2="11.7" y2="11.5"/>
+          </svg>
+        </div>
+        <div class="skill-card-title">Integration &amp; Data Operations</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">M&amp;A Data Integration</span><span class="skill-tag">Process Automation</span><span class="skill-tag">Data Governance</span><span class="skill-tag">ETL Frameworks</span><span class="skill-tag">SDLC Waterfall</span><span class="skill-tag">ITIL</span>
+      </div>
+    </div>
+
+    <div class="skill-card glass">
+      <div class="skill-card-head">
+        <div class="skill-icon" style="background:rgba(207,114,114,0.12)">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--skill-5)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="7" cy="5.5" r="2.5"/><circle cx="13" cy="5.5" r="2.5"/>
+            <path d="M1 17c0-3.3 2.7-6 6-6h6c3.3 0 6 2.7 6 6"/>
+            <line x1="10" y1="11" x2="10" y2="17"/><line x1="7.5" y1="14" x2="12.5" y2="14"/>
+          </svg>
+        </div>
+        <div class="skill-card-title">Leadership &amp; Programme Management</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Team Building</span><span class="skill-tag">Remote &amp; Offshore Mgmt</span><span class="skill-tag">Vendor Relations</span><span class="skill-tag">Stakeholder Communication</span><span class="skill-tag">Budget Management</span><span class="skill-tag">Risk Management</span>
+      </div>
+    </div>
+
+    <div class="skill-card glass">
+      <div class="skill-card-head">
+        <div class="skill-icon" style="background:rgba(114,168,207,0.12)">
+          <svg viewBox="0 0 20 20" fill="none" stroke="var(--skill-6)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 1.5L2 5v6c0 4.5 3.4 8.7 8 9.7 4.6-1 8-5.2 8-9.7V5L10 1.5z"/>
+            <polyline points="7,10 9.5,12.5 14,8"/>
+          </svg>
+        </div>
+        <div class="skill-card-title">Compliance &amp; Governance</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Security Compliance</span><span class="skill-tag">CUI (Federal Gov't)</span><span class="skill-tag">Data Governance</span><span class="skill-tag">Divestiture Management</span><span class="skill-tag">Business Continuity</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ CREDENTIALS ═════════════════════════════════════ -->
+<section id="credentials">
+  <div class="sec-label reveal"><div class="sec-label-line"></div><span class="mono">Education</span></div>
+  <h2 class="display sec-title reveal" style="margin-bottom:1.75rem">Academic <em>foundation.</em></h2>
+
+  <div class="stagger" style="margin-bottom:3rem">
+    <div class="edu-row">
+      <div>
+        <div class="mono" style="margin-bottom:0.45rem">Undergraduate Degree</div>
+        <div class="edu-degree-text">BBA — Business Management</div>
+        <div class="edu-school-text">St. Edward's University · Austin, TX</div>
+        <div class="edu-detail-text">Graduated with Distinction</div>
+      </div>
+      <div class="edu-badge">Cum Laude</div>
+    </div>
+  </div>
+
+  <div class="sec-label reveal" style="margin-bottom:1.25rem"><div class="sec-label-line"></div><span class="mono">Certifications</span></div>
+  <h2 class="display reveal" style="font-size:clamp(1.5rem,2.5vw,2rem);margin-bottom:1.25rem">Credentials that <em>count.</em></h2>
+
+  <div class="stagger">
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-text">ITIL Foundation v2 &amp; v3 Certification</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-text">Lean Six Sigma - White Belt</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-text">CUI - Controlled Unclassified Information (Federal Government)</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-text">OBIEE - Oracle Business Intelligence Enterprise Edition</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-text">AI Tooling &amp; Applications</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-text">Google Cloud Tools &amp; Applications</div></div>
+  </div>
+</section>
+
+
+<!-- ═══ CONTACT ══════════════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-layout">
+    <div class="reveal">
+      <div class="sec-label"><div class="sec-label-line"></div><span class="mono">Get in Touch</span></div>
+      <h2 class="display" style="font-size:clamp(1.8rem,3.5vw,3rem);margin:0.6rem 0 1rem">Let's build something <em>exceptional.</em></h2>
+      <p style="color:var(--text-secondary);font-size:clamp(0.86rem,1.4vw,0.95rem);line-height:1.8;max-width:480px">Open to Director or Senior Manager roles in Finance BI, Sales Strategy, or Analytics leadership. Based in Frisco, TX  and available for on-site, hybrid, or remote opportunities.</p>
+      <div class="contact-links">
+        <a href="mailto:ejr3182000@gmail.com" class="contact-link glass">
+          <span class="contact-link-icon">✉️</span> ejr3182000@gmail.com
+        </a>
+        <a href="tel:9728147805" class="contact-link glass">
+          <span class="contact-link-icon">📞</span> 972-814-7805
+        </a>
+        <a href="https://www.linkedin.com/in/jeannie-ramirez-1a8b45/" class="contact-link glass" target="_blank" rel="noopener">
+          <span class="contact-link-icon">💼</span> LinkedIn Profile
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="avail-card glass">
+        <div class="avail-label"><span class="avail-dot"></span>Available Now</div>
+        <p class="avail-text">Actively exploring senior leadership roles where strong BI systems and analytical strategy can drive real business outcomes.</p>
+        <div class="preferred-roles">
+          <div class="mono" style="margin-bottom:0.75rem;color:var(--text-muted)">Preferred Roles</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Director, Finance BI</span>
+            <span class="skill-tag">Sr. Manager, Analytics</span>
+            <span class="skill-tag">VP Business Intelligence</span>
+            <span class="skill-tag">Head of Sales Strategy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer>
+  <span>© 2025 Elizabeth J. Ramirez · Frisco, TX</span>
+  <span>Open to senior leadership roles nationwide</span>
+</footer>
+
+
+
+<script>
+/* ── Scroll reveal ──────────────────────────────────── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal, .stagger').forEach(el => obs.observe(el));
+
+/* ── Mobile menu ────────────────────────────────────── */
+function toggleMenu() {
+  const btn = document.getElementById('hamburger');
+  const nav = document.getElementById('mobileNav');
+  btn.classList.toggle('open');
+  nav.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileNav').classList.remove('open');
+}
+document.addEventListener('click', e => {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburger');
+  if (nav && btn && nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)) closeMenu();
+});
+</script>
+</body>
+</html>
